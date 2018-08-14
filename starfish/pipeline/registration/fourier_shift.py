@@ -86,4 +86,19 @@ def shift_im(im: np.ndarray, shift: np.ndarray) -> np.ndarray:
     """register image according to the provided shift values"""
     fim_shift = fourier_shift(np.fft.fftn(im), shift * -1)
     im_shift = np.fft.ifftn(fim_shift)
-    return im_shift.real
+    im_shift = im_shift.real
+    # identify ranges that have been wrapped and set the values to zero
+    imshape= list(im_shift.shape)
+
+    full_index_list = [slice(si) for si in imshape]
+
+    shifted_indices=[(np.arange(imshape[i])-shift[i]) for i in range(len(imshape))]
+
+    index_masks=[np.logical_or(index_and_shape[0]<0,index_and_shape[0]>index_and_shape[1]) for index_and_shape in zip(shifted_indices,imshape)]
+
+    for i, ignore in enumerate(imshape):
+        indexListToUse=list(fullIndexList)
+        indexListToUse[i] = indexList2[i]
+        im_shift[tuple(indexListToUse)]=0
+
+    return im_shift
