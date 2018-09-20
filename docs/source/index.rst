@@ -31,6 +31,9 @@ Starfish documentation
     usage/index.rst
 
 .. toctree::
+    support.rst
+
+.. toctree::
     glossary/glossary.md
 
 .. toctree::
