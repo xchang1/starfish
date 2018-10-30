@@ -89,9 +89,10 @@ def build_image(
             ImageFormat.TIFF,
         )
 
-        for z_ix in range(z_count):
-            for round_ix in range(round_count):
-                for ch_ix in range(ch_count):
+        # order reflects the most common acquisition order of the data
+        for round_ix in range(round_count):
+            for ch_ix in range(ch_count):
+                for z_ix in range(z_count):
                     image = image_fetcher.get_tile(fov_ix, round_ix, ch_ix, z_ix)
                     tile = Tile(
                         image.coordinates,
