@@ -5,7 +5,8 @@ from starfish.types import Indices
 
 
 def join_dimension_sizes(
-        dimension_sequence: Sequence[Indices],
+        dimension_order: Sequence[Indices],
+        *,
         size_for_round: int,
         size_for_ch: int,
         size_for_z: int,
@@ -25,7 +26,7 @@ def join_dimension_sizes(
 
     return [
         (dimension, dimension_mapping[dimension])
-        for dimension in dimension_sequence
+        for dimension in dimension_order
     ]
 
 
